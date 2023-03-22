@@ -1,0 +1,38 @@
+@import './colors.scss';
+
+.Registration {
+    background: $surface;
+    border-radius: 15px;
+    padding: 40px;
+    margin: 50px 20px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    &__item {
+        width: 100%;
+    }
+
+    .titles {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    button {
+        margin: 0 auto;
+    }
+}
+
+.caption {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    a {
+        text-decoration: underline;
+        cursor: pointer;
+        color: inherit;
+    }
+}
