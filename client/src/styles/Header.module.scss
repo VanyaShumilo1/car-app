@@ -1,0 +1,32 @@
+@import './colors.scss';
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: $surface;
+    color: $white;
+    box-shadow: 10px $white;
+    svg {
+        display: block;
+    }
+    &__car {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    &__burger {
+        path {
+            stroke: $white;
+        }
+    }
+
+    &__plus {
+        path {
+            fill: $white;
+        }
+    }
+}
+
