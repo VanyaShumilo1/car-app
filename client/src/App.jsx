@@ -6,6 +6,7 @@ import Home from "./Pages/Home.jsx";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchAuthMe, selectIsAuth} from "./redux/slices/auth.js";
 import {useEffect} from "react";
+import AddCar from "./Pages/AddCar.jsx";
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
                 isAuth ?
                     <>
                         <Route path={'/'} element={<Home />}/>
+                        <Route path={'/addcar'} element={<AddCar />}/>
                         <Route path={'/*'} element={<Navigate to={'/'}/>}/>
                     </>
                     :

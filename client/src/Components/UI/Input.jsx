@@ -3,11 +3,14 @@ import styles from '../../styles/Input.module.scss'
 
 const Input = ({register, name, rules, ...props}) => {
     return (
-        <input
-            {...props}
-            {...(register && register(name, rules))}
-            className={styles.input}
-        />
+        <div>
+            <input
+                {...props}
+                {...(register && register(name, rules))}
+                className={styles.input}
+            />
+        </div>
+
     );
 };
 

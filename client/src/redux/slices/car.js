@@ -19,7 +19,7 @@ const carSlice = createSlice({
     initialState,
     reducer: {},
     extraReducers: {
-        //cars
+        //get cars
         [fetchCars.pending]: (state) => {
             state.cars.items = []
             state.cars.status = 'loading'
