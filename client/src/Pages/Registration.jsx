@@ -29,7 +29,7 @@ const Registration = () => {
     const onSubmit = async (values) => {
         const data = await dispatch(fetchRegister(values))
 
-        if (!data.payload.user) {
+        if (!data.payload) {
             return alert("Registration failed")
         }
 

@@ -7,8 +7,17 @@ export const fetchCars = createAsyncThunk('/car/fetchCars', async () => {
     return data
 })
 
+export const fetchOutgoings = createAsyncThunk('/car/outgoings', async () => {
+    const {data} = await axios.get('/outgoing')
+    return data
+})
+
 const initialState = {
     cars: {
+        items: [],
+        status: 'loading'
+    },
+    outgoings: {
         items: [],
         status: 'loading'
     }
@@ -31,7 +40,22 @@ const carSlice = createSlice({
         [fetchCars.rejected]: (state) => {
             state.cars.items = []
             state.cars.status = 'error'
-        }
+        },
+
+        //get outgoings
+        [fetchOutgoings.pending]: (state) => {
+            state.outgoings.items = []
+            state.outgoings.status = 'loading'
+        },
+        [fetchOutgoings.fulfilled]: (state, action) => {
+            state.outgoings.items = action.payload
+            state.outgoings.status = 'loaded'
+        },
+        [fetchOutgoings.rejected]: (state) => {
+            state.outgoings.items = []
+            state.outgoings.status = 'error'
+        },
+
     }
 })
 

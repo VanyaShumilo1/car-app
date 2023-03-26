@@ -11,6 +11,7 @@ router.post('/', checkAuth, outgoingValidation, handleValidation, async (req, re
         const carId = req.headers.carid
         const outgoing = await OutgoingModel.create({
             car: carId,
+            user: req.userId,
             price: req.body.price,
             description: req.body.description,
             type: req.body.type,
@@ -27,6 +28,19 @@ router.post('/', checkAuth, outgoingValidation, handleValidation, async (req, re
             message: "",
             err
         })
+    }
+})
+
+router.get('/', checkAuth, async (req, res) => {
+    try {
+        const outgoings = await OutgoingModel.find({user: req.userId})
+
+        res.status(200).json({
+            outgoings
+        })
+    } catch (err) {
+        console.log(err)
+        res.status(404).json(err)
     }
 })
 

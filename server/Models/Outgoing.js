@@ -20,6 +20,10 @@ const OutgoingModel = new Schema({
     type: {
         type: String,
         required: true,
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
     }
 }, {timestamps: true})
 

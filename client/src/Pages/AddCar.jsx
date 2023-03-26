@@ -6,6 +6,7 @@ import {useForm} from "react-hook-form";
 import {useDispatch} from "react-redux";
 import axios from "../axios.js";
 import Button from "../Components/UI/Button.jsx";
+import HeaderBack from "../Components/Header/HeaderBack.jsx";
 
 const AddCar = () => {
 
@@ -33,8 +34,6 @@ const AddCar = () => {
     })
 
     const onSubmit = async (values) => {
-
-
         const fields = {
             ...values,
             year: Number(values.year),
@@ -46,11 +45,10 @@ const AddCar = () => {
         goBack()
     }
 
-    console.log(errors)
 
     return (
         <div className={styles.addCar}>
-            <button onClick={goBack}>back</button>
+            <HeaderBack title="Add car"/>
 
             <form className={styles.addCar__form} onSubmit={handleSubmit(onSubmit)}>
                 <Input
@@ -85,18 +83,19 @@ const AddCar = () => {
                     register={register}
                     name={'engineSize'}
                     rules={{required: 'Enter engineSize'}}
-                    type="number"
+                    step="0.01"
+                    type="text"
                     placeholder="Engine size (L)"
                 />
                 <Input
                     register={register}
                     name={'description'}
-                    rules={{required: 'Enter description'}} // need to be optional
+                    rules={{}}
                     type="text"
                     placeholder="Description"
                 />
 
-                <Button type="submit">Submit</Button>
+                <Button type="submit">Add car</Button>
             </form>
         </div>
     );

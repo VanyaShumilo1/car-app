@@ -1,0 +1,12 @@
+@import './colors.scss';
+
+.simpleButton {
+  background: $primary;
+  color: $onPrimary;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
