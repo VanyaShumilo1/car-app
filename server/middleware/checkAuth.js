@@ -3,10 +3,10 @@ import config from "config";
 
 export default (req, res, next) => {
     // postman
-    //const token = (req.headers.authorization || '').split(' ')[1]
+    const token = (req.headers.authorization || '').split(' ')[1] ? (req.headers.authorization || '').split(' ')[1] : req.headers.authorization
 
     //browser
-    const token = req.headers.authorization
+    //const token = req.headers.authorization
     if (token) {
         try {
             const decoded = jwt.verify(token, config.get('secretKey'))

@@ -36,7 +36,10 @@ const Header = ({sidebar, setSidebar, isCarListActive, setCarListActive}) => {
                 </svg>
             </div>
             <div className={styles.header__car}>
-                <div>{currentCar?.brand} {currentCar?.model}</div>
+                {currentCar ?
+                    <div>{currentCar?.brand} {currentCar?.model}</div>
+                    : <div>No cars yet</div>
+                }
                 <svg onClick={handleCarList} className={isCarListActive && styles.returnedArrow} fill="#fff" height="15px" width="15px" version="1.1" id="Layer_1"
                      xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
                      viewBox="0 0 330 330" xmlSpace="preserve">
