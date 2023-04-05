@@ -45,7 +45,10 @@ const carSlice = createSlice({
         },
         [fetchCars.fulfilled]: (state, action) => {
             state.cars.items = action.payload.cars
-            state.currentCar = action.payload.cars[0]
+            if (!state.currentCar._id) {
+                state.currentCar = action.payload.cars[0]
+            }
+            //state.currentCar = action.payload.cars[0]
             state.cars.status = 'loaded'
         },
         [fetchCars.rejected]: (state) => {

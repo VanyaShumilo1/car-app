@@ -1,0 +1,17 @@
+@import './colors.scss';
+
+.circleLinkButton {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: $secondary;
+  color: $onSecondary;
+  width: 60px;
+  height: 60px;
+  font-size: 40px;
+  border-radius: 100%;
+  text-decoration: none;
+}

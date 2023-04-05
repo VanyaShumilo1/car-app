@@ -7,6 +7,7 @@ import {useDispatch} from "react-redux";
 import axios from "../axios.js";
 import Button from "../Components/UI/Button.jsx";
 import HeaderBack from "../Components/Header/HeaderBack.jsx";
+import Title from "../Components/UI/Title.jsx";
 
 const AddCar = () => {
 
@@ -49,8 +50,8 @@ const AddCar = () => {
     return (
         <div className={styles.addCar}>
             <HeaderBack title="Add car"/>
-
             <form className={styles.addCar__form} onSubmit={handleSubmit(onSubmit)}>
+                <Title>Add Car</Title>
                 <Input
                     register={register}
                     name={'brand'}

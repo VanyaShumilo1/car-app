@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {fetchAuthMe, selectIsAuth} from "./redux/slices/auth.js";
 import {useEffect} from "react";
 import AddCar from "./Pages/AddCar.jsx";
+import AddOutgoing from "./Pages/AddOutgoing.jsx";
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
                     <>
                         <Route path={'/'} element={<Home />}/>
                         <Route path={'/addcar'} element={<AddCar />}/>
+                        <Route path={'/addoutgoing'} element={<AddOutgoing />}/>
                         <Route path={'/*'} element={<Navigate to={'/'}/>}/>
                     </>
                     :

@@ -5,10 +5,11 @@ import {Link} from "react-router-dom";
 import {fetchCars, fetchOutgoings, fetchOutgoingsFromCar} from "../redux/slices/car.js";
 import Header from "../Components/Header/Header.jsx";
 import Sidebar from "../Components/Sidebar/Sidebar.jsx";
-import {countOutgoings, testFunc} from "../utils/countOutgoings.js";
+import {countOutgoings, createOutgoingsArrays} from "../utils/countOutgoings.js";
 import CarList from "../Components/CarList.jsx";
 import Chart from 'react-apexcharts'
 import chartStyles from '../styles/Chart.module.scss'
+import CircleLinkButton from "../Components/UI/CircleLinkButton.jsx";
 const Home = () => {
 
     const dispatch = useDispatch()
@@ -43,7 +44,7 @@ const Home = () => {
         setPrice(countOutgoings(outgoings))
     }, [outgoings])
 
-    const [keys, values] = testFunc(outgoings)
+    const [keys, values] = createOutgoingsArrays(outgoings)
 
     console.log(outgoings)
     console.log(window.innerWidth)
@@ -90,8 +91,6 @@ const Home = () => {
                 }}
             />
 
-
-
             <Link to={'/login'}>log</Link>
             <button onClick={onClickLogout}>Logout</button>
             <div>
@@ -101,6 +100,8 @@ const Home = () => {
             <div>
                 {car.length}
             </div>
+
+            {/*<CircleLinkButton to={'/addoutgoing'}>+</CircleLinkButton>*/}
         </div>
     );
 };

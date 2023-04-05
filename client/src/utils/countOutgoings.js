@@ -8,7 +8,7 @@ export const countOutgoings = (outgoings) => {
 
     return x
 }
-export const testFunc = (outgoings) => {
+export const createOutgoingsArrays = (outgoings) => {
     const mp = {}
 
     for(let i = 0; i < outgoings.length; i++) {
