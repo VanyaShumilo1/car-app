@@ -12,6 +12,11 @@ export const fetchOutgoings = createAsyncThunk('/car/outgoings', async () => {
     return data
 })
 
+export const fetchOutgoingsFromCar = createAsyncThunk('car/carid/', async (carId) => {
+    const {data} = await axios.get(`outgoing/carid/${carId}`)
+    return data
+})
+
 const initialState = {
     cars: {
         items: [],
@@ -20,13 +25,18 @@ const initialState = {
     outgoings: {
         items: [],
         status: 'loading'
-    }
+    },
+    currentCar: {}
 }
 
 const carSlice = createSlice({
     name: 'cars',
     initialState,
-    reducer: {},
+    reducers: {
+        changeCurrentCar(state, action) {
+            state.currentCar = action.payload
+        }
+    },
     extraReducers: {
         //get cars
         [fetchCars.pending]: (state) => {
@@ -35,6 +45,7 @@ const carSlice = createSlice({
         },
         [fetchCars.fulfilled]: (state, action) => {
             state.cars.items = action.payload.cars
+            state.currentCar = action.payload.cars[0]
             state.cars.status = 'loaded'
         },
         [fetchCars.rejected]: (state) => {
@@ -48,7 +59,7 @@ const carSlice = createSlice({
             state.outgoings.status = 'loading'
         },
         [fetchOutgoings.fulfilled]: (state, action) => {
-            state.outgoings.items = action.payload
+            state.outgoings.items = action.payload.outgoings
             state.outgoings.status = 'loaded'
         },
         [fetchOutgoings.rejected]: (state) => {
@@ -56,7 +67,21 @@ const carSlice = createSlice({
             state.outgoings.status = 'error'
         },
 
+        //fetchOutgoingsFromCar
+        [fetchOutgoingsFromCar.pending]: (state) => {
+            state.outgoings.items = []
+            state.outgoings.status = 'loading'
+        },
+        [fetchOutgoingsFromCar.fulfilled]: (state, action) => {
+            state.outgoings.items = action.payload.outgoings
+            state.outgoings.status = 'loaded'
+        },
+        [fetchOutgoingsFromCar.rejected]: (state) => {
+            state.outgoings.items = []
+            state.outgoings.status = 'error'
+        },
     }
 })
 
 export const carReducer = carSlice.reducer
+export const {changeCurrentCar} = carSlice.actions

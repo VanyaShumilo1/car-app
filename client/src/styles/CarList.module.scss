@@ -1,0 +1,24 @@
+@import "./colors.scss";
+
+.carList {
+  z-index: 3;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+  margin: 0 auto;
+  width: 100%;
+  padding: 20px;
+  background: $surface;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  transition: 0.3s all;
+}
+
+.active {
+  top: 60px;
+}
+

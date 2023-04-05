@@ -1,13 +1,24 @@
 import React from 'react';
 import styles from '../../styles/Header.module.scss'
 import {Link} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 
-const Header = ({sidebar, setSidebar}) => {
+const Header = ({sidebar, setSidebar, isCarListActive, setCarListActive}) => {
+
+    const currentCar = useSelector(state => state.car.currentCar)
 
     const handleSidebar = () => {
         setSidebar(
             sidebar === ''
+                ? 'active'
+                : ''
+        )
+    }
+
+    const handleCarList = () => {
+        setCarListActive(
+            isCarListActive === ''
                 ? 'active'
                 : ''
         )
@@ -25,8 +36,8 @@ const Header = ({sidebar, setSidebar}) => {
                 </svg>
             </div>
             <div className={styles.header__car}>
-                <div>Skoda Octavia</div>
-                <svg fill="#fff" height="15px" width="15px" version="1.1" id="Layer_1"
+                <div>{currentCar?.brand} {currentCar?.model}</div>
+                <svg onClick={handleCarList} className={isCarListActive && styles.returnedArrow} fill="#fff" height="15px" width="15px" version="1.1" id="Layer_1"
                      xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
                      viewBox="0 0 330 330" xmlSpace="preserve">
                     <path id="XMLID_225_" d="M325.607,79.393c-5.857-5.857-15.355-5.858-21.213,0.001l-139.39,139.393L25.607,79.393

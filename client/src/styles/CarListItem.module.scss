@@ -1,0 +1,29 @@
+@import "./colors.scss";
+
+.carListItem {
+  background: none;
+  outline: none;
+  border: none;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  color: $onSurface;
+  font-size: 16px;
+}
+
+.active {
+  color: $secondary;
+}
+.brand {
+  flex: 2;
+  text-align: start;
+}
+
+.year {
+  flex: 1;
+}
+
+.engine {
+  flex: 1;
+  text-align: start;
+}
