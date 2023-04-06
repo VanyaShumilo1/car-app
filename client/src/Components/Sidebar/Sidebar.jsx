@@ -3,6 +3,7 @@ import styles from '../../styles/Sidebar.module.scss'
 import {useDispatch, useSelector} from "react-redux";
 import {logout} from "../../redux/slices/auth.js";
 import SimpleButton from "../UI/SimpleButton.jsx";
+import {logoutCar} from "../../redux/slices/car.js";
 
 const Sidebar = ({sidebar, setSidebar}) => {
 
@@ -20,6 +21,7 @@ const Sidebar = ({sidebar, setSidebar}) => {
 
     const onClickLogout = () => {
         dispatch(logout())
+        dispatch(logoutCar())
     };
 
 

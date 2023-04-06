@@ -11,6 +11,8 @@ import Chart from 'react-apexcharts'
 import chartStyles from '../styles/Chart.module.scss'
 import CircleLinkButton from "../Components/UI/CircleLinkButton.jsx";
 import OutgoingsList from "../Components/OutgoingsList.jsx";
+import Title from "../Components/UI/Title.jsx";
+import styles from '../styles/Home.module.scss'
 const Home = () => {
 
     const dispatch = useDispatch()
@@ -54,57 +56,69 @@ const Home = () => {
             <Header sidebar={sidebar} setSidebar={setSidebar} isCarListActive={isCarListActive} setCarListActive={setCarListActive}/>
             <Sidebar sidebar={sidebar} setSidebar={setSidebar}/>
             <CarList isCarListActive={isCarListActive} setCarListActive={setCarListActive}/>
+            {
+                currentCar
+                    ? (
+                        <>
+                            <Chart
+                                className={chartStyles.chart}
+                                type={'donut'}
+                                width={window.innerWidth}
+                                height={400}
+                                series={values}
+                                options={{
+                                    chart: {
+                                        foreColor: '#fff',
+                                        animations: {
+                                            enabled: true,
+                                            easing: 'easein',
+                                            speed: 800,
+                                            animateGradually: {
+                                                enabled: true,
+                                                delay: 150
+                                            },
+                                            dynamicAnimation: {
+                                                enabled: true,
+                                                speed: 350
+                                            }
+                                        }
+                                    },
 
-            <Chart
-                className={chartStyles.chart}
-                type={'donut'}
-                width={window.innerWidth}
-                height={400}
-                series={values}
-                options={{
-                    animations: {
-                        enabled: true,
-                    },
+                                    labels: keys,
+                                    theme: {
+                                        palette: 'palette6' // upto palette10
+                                    },
 
-                    labels: keys,
-                    theme: {
-                        palette: 'palette6' // upto palette10
-                    },
-                    chart: {
-                        foreColor: '#fff'
-                    },
 
-                    plotOptions: {
-                        pie: {
-                            donut: {
-                                labels: {
-                                    show: true,
-                                    total: {
-                                        show: true,
-                                        color: "white"
+                                    plotOptions: {
+                                        pie: {
+                                            donut: {
+                                                labels: {
+                                                    show: true,
+                                                    total: {
+                                                        show: true,
+                                                        color: "white"
+                                                    }
+
+                                                }
+                                            }
+                                        }
                                     }
+                                }}
+                            />
 
-                                }
-                            }
-                        }
-                    }
-                }}
-            />
+                            <OutgoingsList outgoings={outgoings}/>
+                            <CircleLinkButton to={'/addoutgoing'}>+</CircleLinkButton>
+                        </>
+                    )
+                    :
+                    <div className={styles.noCar}>
+                        <Title>
+                            Now you need to add a car, you can do it by click on "+" on top right corner
+                        </Title>
+                    </div>
+            }
 
-
-            {/*<Link to={'/login'}>log</Link>*/}
-            {/*<button onClick={onClickLogout}>Logout</button>*/}
-            {/*<div>*/}
-            {/*    {user?.email}*/}
-            {/*    {price}*/}
-            {/*</div>*/}
-            {/*<div>*/}
-            {/*    {car.length}*/}
-            {/*</div>*/}
-
-
-            <OutgoingsList outgoings={outgoings}/>
-            <CircleLinkButton to={'/addoutgoing'}>+</CircleLinkButton>
         </div>
     );
 };

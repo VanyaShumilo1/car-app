@@ -15,8 +15,8 @@ const HeaderBack = (props) => {
         <div className={styles.header}>
             <button className={styles.back} onClick={goBack}>
                 <svg fill="#fff" height="25px" width="25px" version="1.1" id="Layer_1"
-                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                     viewBox="0 0 492 492" xml:space="preserve">
+                     xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
+                     viewBox="0 0 492 492" xmlSpace="preserve">
                     <g>
                         <g>
                             <path d="M464.344,207.418l0.768,0.168H135.888l103.496-103.724c5.068-5.064,7.848-11.924,7.848-19.124

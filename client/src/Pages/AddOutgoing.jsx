@@ -39,7 +39,7 @@ const AddOutgoing = () => {
             price: Number(values.price),
 
         }
-        console.log(fields)
+
         const car = await axios.post('/outgoing/', fields, {
             headers: {
                 carid: currentCar._id

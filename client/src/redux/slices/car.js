@@ -35,6 +35,11 @@ const carSlice = createSlice({
     reducers: {
         changeCurrentCar(state, action) {
             state.currentCar = action.payload
+        },
+        logoutCar(state, action) {
+            state.currentCar = {}
+            state.cars.items = []
+            state.outgoings.items = []
         }
     },
     extraReducers: {
@@ -88,3 +93,4 @@ const carSlice = createSlice({
 
 export const carReducer = carSlice.reducer
 export const {changeCurrentCar} = carSlice.actions
+export const {logoutCar} = carSlice.actions
