@@ -8,6 +8,7 @@ import axios from "../axios.js";
 import Button from "../Components/UI/Button.jsx";
 import HeaderBack from "../Components/Header/HeaderBack.jsx";
 import Title from "../Components/UI/Title.jsx";
+import {capitalize} from "../utils/capitalize.js";
 
 const AddCar = () => {
 
@@ -37,6 +38,8 @@ const AddCar = () => {
     const onSubmit = async (values) => {
         const fields = {
             ...values,
+            brand: capitalize(values.brand),
+            model: capitalize(values.model),
             year: Number(values.year),
             engineSize: Number(values.engineSize),
             description: values.description ? values.description : ""

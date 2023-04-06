@@ -10,6 +10,7 @@ import CarList from "../Components/CarList.jsx";
 import Chart from 'react-apexcharts'
 import chartStyles from '../styles/Chart.module.scss'
 import CircleLinkButton from "../Components/UI/CircleLinkButton.jsx";
+import OutgoingsList from "../Components/OutgoingsList.jsx";
 const Home = () => {
 
     const dispatch = useDispatch()
@@ -47,7 +48,6 @@ const Home = () => {
     const [keys, values] = createOutgoingsArrays(outgoings)
 
     console.log(outgoings)
-    console.log(window.innerWidth)
 
     return (
         <div>
@@ -91,17 +91,20 @@ const Home = () => {
                 }}
             />
 
-            <Link to={'/login'}>log</Link>
-            <button onClick={onClickLogout}>Logout</button>
-            <div>
-                {user?.email}
-                {price}
-            </div>
-            <div>
-                {car.length}
-            </div>
 
-            {/*<CircleLinkButton to={'/addoutgoing'}>+</CircleLinkButton>*/}
+            {/*<Link to={'/login'}>log</Link>*/}
+            {/*<button onClick={onClickLogout}>Logout</button>*/}
+            {/*<div>*/}
+            {/*    {user?.email}*/}
+            {/*    {price}*/}
+            {/*</div>*/}
+            {/*<div>*/}
+            {/*    {car.length}*/}
+            {/*</div>*/}
+
+
+            <OutgoingsList/>
+            <CircleLinkButton to={'/addoutgoing'}>+</CircleLinkButton>
         </div>
     );
 };

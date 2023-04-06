@@ -1,0 +1,11 @@
+@import './colors.scss';
+
+.OutgoingListItem {
+  width: 100%;
+  height: 100px;
+  background: $surface;
+  margin-bottom: 10px;
+  &:last-child {
+    margin-bottom: 50px;
+  }
+}

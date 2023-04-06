@@ -14,10 +14,11 @@ export const createOutgoingsArrays = (outgoings) => {
     for(let i = 0; i < outgoings.length; i++) {
 
         if (!mp[outgoings[i].type]) {
-            mp[outgoings[i].type] = outgoings[i].price
+            mp[outgoings[i].type] = Number(outgoings[i].price)
         } else {
-            mp[outgoings[i].type] += outgoings[i].price
+            mp[outgoings[i].type] += Number(outgoings[i].price)
         }
+
     }
 
     return [Object.keys(mp), Object.values(mp)]

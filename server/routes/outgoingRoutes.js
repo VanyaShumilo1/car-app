@@ -46,7 +46,6 @@ router.get('/', checkAuth, async (req, res) => {
 
 router.get('/carid/:id', checkAuth, async (req, res) => {
     try {
-
         const outgoings = await OutgoingModel.find({car: req.params.id})
 
         res.status(200).json({
