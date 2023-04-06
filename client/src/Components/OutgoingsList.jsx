@@ -2,18 +2,14 @@ import React from 'react';
 import styles from '../styles/OutgoingsList.module.scss'
 import OutgoingsListItem from "./OutgoingsListItem.jsx";
 
-const OutgoingsList = () => {
+const OutgoingsList = ({outgoings, ...props}) => {
     return (
         <div className={styles.OutgoingsList}>
-            <OutgoingsListItem/>
-            <OutgoingsListItem/>
-            <OutgoingsListItem/>
-            <OutgoingsListItem/>
-            <OutgoingsListItem/>
-            <OutgoingsListItem/>
-            <OutgoingsListItem/>
-            <OutgoingsListItem/>
-            <OutgoingsListItem/>
+            {
+                outgoings && outgoings.map(outgoing => {
+                    return <OutgoingsListItem key={outgoing._id} outgoing={outgoing}/>
+                })
+            }
         </div>
     );
 };

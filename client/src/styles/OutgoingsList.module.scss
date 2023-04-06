@@ -1,8 +1,8 @@
 @import './colors.scss';
 
 .OutgoingsList {
-  gap: 5px;
-  height: 500px;
-  border: 1px solid red;
+  margin-top: 20px;
+  height: 490px;
   overflow-y: scroll;
+  padding: 0 10px;
 }

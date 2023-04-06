@@ -103,7 +103,7 @@ const Home = () => {
             {/*</div>*/}
 
 
-            <OutgoingsList/>
+            <OutgoingsList outgoings={outgoings}/>
             <CircleLinkButton to={'/addoutgoing'}>+</CircleLinkButton>
         </div>
     );
