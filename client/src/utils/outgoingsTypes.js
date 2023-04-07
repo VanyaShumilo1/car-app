@@ -1,0 +1,1 @@
+export const outgoingsTypes = ["Fuel", "Service", "Washing", "Tuning", "Tyres", "Parking", "Taxes", "Insurance", "Other"]

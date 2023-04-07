@@ -8,6 +8,8 @@ import styles from "../styles/AddCar.module.scss";
 import Title from "../Components/UI/Title.jsx";
 import Input from "../Components/UI/Input.jsx";
 import Button from "../Components/UI/Button.jsx";
+import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
+import {outgoingsTypes} from "../utils/outgoingsTypes.js";
 
 const AddOutgoing = () => {
 
@@ -75,14 +77,25 @@ const AddOutgoing = () => {
                     type="text"
                     placeholder="Description"
                 />
-                <Input
-                    register={register}
-                    name={'type'}
-                    rules={{required: 'Enter type'}}
-                    type="text"
-                    placeholder="Type"
-                />
 
+                <div className={styles.selectBlock}>
+                    <FormControl className={"demo-simple-select"} fullWidth>
+                        <InputLabel id="demo-simple-select-label">Type</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            label="Type"
+                            helperText={errors.type?.message}
+                            {...register('type', {required: 'Enter type'})}
+
+                        >
+                            {
+                                outgoingsTypes.map(item => <MenuItem key={item} value={item}>{item}</MenuItem>)
+                            }
+
+                        </Select>
+                    </FormControl>
+                </div>
 
                 <Button type="submit">Add outgoing</Button>
             </form>

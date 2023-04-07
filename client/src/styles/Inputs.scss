@@ -1,5 +1,9 @@
 @import './colors.scss';
 
+.css-aqpgxn-MuiFormLabel-root-MuiInputLabel-root {
+ color: $onSurface !important;
+}
+
 .MuiOutlinedInput-input, .MuiInputLabel-outlined {
  color: $onSurface !important;
 }

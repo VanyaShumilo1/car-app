@@ -111,7 +111,7 @@ const AddCar = () => {
                     {...register('description', {})}
                 />
 
-                <div className={styles.fuelSelectBlock}>
+                <div className={styles.selectBlock}>
                     <FormControl className={"demo-simple-select"} fullWidth>
                         <InputLabel id="demo-simple-select-label">Fuel</InputLabel>
                         <Select
