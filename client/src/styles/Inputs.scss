@@ -1,0 +1,17 @@
+@import './colors.scss';
+
+.MuiOutlinedInput-input, .MuiInputLabel-outlined {
+ color: $onSurface !important;
+}
+
+.css-v4u5dn-MuiInputBase-root-MuiInput-root:not(.Mui-disabled, .Mui-error):before {
+ border-bottom: 1px solid $primary !important;
+}
+
+.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+ border: 1px solid $primary !important;
+}
+
+.css-hfutr2-MuiSvgIcon-root-MuiSelect-icon {
+ color: $primary !important;
+}

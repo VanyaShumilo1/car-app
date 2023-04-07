@@ -9,6 +9,9 @@ import Button from "../Components/UI/Button.jsx";
 import HeaderBack from "../Components/Header/HeaderBack.jsx";
 import Title from "../Components/UI/Title.jsx";
 import {capitalize} from "../utils/capitalize.js";
+import {FormControl, InputLabel, MenuItem, Select, TextField} from "@mui/material";
+import {fuelTypes} from "../utils/fuelTypes.js";
+import '../styles/Inputs.scss'
 
 const AddCar = () => {
 
@@ -25,8 +28,8 @@ const AddCar = () => {
         }
     } = useForm({
         defaultValues: {
-            model: '',
             brand: '',
+            model: '',
             year: '',
             fuelType: '',
             engineSize: '',
@@ -49,55 +52,84 @@ const AddCar = () => {
         goBack()
     }
 
+    console.log(errors.fuelType)
 
     return (
         <div className={styles.addCar}>
             <HeaderBack title="Add car"/>
             <form className={styles.addCar__form} onSubmit={handleSubmit(onSubmit)}>
                 <Title>Add Car</Title>
-                <Input
-                    register={register}
-                    name={'brand'}
-                    rules={{required: 'Enter brand'}}
+                <TextField
+                    className={styles.field}
                     type="text"
-                    placeholder="Brand"
+                    label="Brand"
+                    variant="standard"
+                    error={Boolean(errors.brand?.message)}
+                    helperText={errors.brand?.message}
+                    {...register('brand', {required: 'Enter brand'})}
+
                 />
-                <Input
-                    register={register}
-                    name={'model'}
-                    rules={{required: 'Enter model'}}
+
+                <TextField
+                    className={styles.field}
                     type="text"
-                    placeholder="Model"
+                    label="Model"
+                    variant="standard"
+                    error={Boolean(errors.model?.message)}
+                    helperText={errors.model?.message}
+                    {...register('model', {required: 'Enter model'})}
                 />
-                <Input
-                    register={register}
-                    name={'year'}
-                    rules={{required: 'Enter year'}}
+
+                <TextField
+                    className={styles.field}
                     type="number"
-                    placeholder="Year"
+                    label="Year"
+                    variant="standard"
+                    error={Boolean(errors.year?.message)}
+                    helperText={errors.year?.message}
+                    {...register('year', {required: 'Enter year'})}
                 />
-                <Input
-                    register={register}
-                    name={'fuelType'}
-                    rules={{required: 'Enter fuelType'}}
+
+                <TextField
+                    className={styles.field}
                     type="text"
-                    placeholder="Fuel"
+                    label="Engine size"
+                    variant="standard"
+                    error={Boolean(errors.engineSize?.message)}
+                    helperText={errors.engineSize?.message}
+                    {...register('engineSize', {required: 'Enter engine size'})}
                 />
-                <Input
-                    register={register}
-                    name={'engineSize'}
-                    rules={{required: 'Enter engineSize'}}
-                    step="0.01"
+
+                <TextField
+                    className={styles.field}
                     type="text"
-                    placeholder="Engine size (L)"
+                    label="Description"
+                    variant="standard"
+                    error={Boolean(errors.description?.message)}
+                    helperText={errors.description?.message}
+
+                    {...register('description', {})}
                 />
-                <Input
-                    register={register}
-                    name={'description'}
-                    rules={{}}
-                    type="text"
-                    placeholder="Description"
-                />
+
+                <div className={styles.fuelSelectBlock}>
+                    <FormControl className={"demo-simple-select"} fullWidth>
+                        <InputLabel id="demo-simple-select-label">Fuel</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            label="Fuel"
+                            helperText={errors.fuelType?.message}
+                            {...register('fuelType', {required: 'Enter fuel type'})}
+
+                        >
+                            {
+                                fuelTypes.map(item => <MenuItem key={item} value={item}>{item}</MenuItem>)
+                            }
+
+                        </Select>
+                    </FormControl>
+                </div>
+
 
                 <Button type="submit">Add car</Button>
             </form>

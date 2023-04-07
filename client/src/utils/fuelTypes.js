@@ -1,0 +1,1 @@
+export const fuelTypes = ["Petrol", "Diesel", "Gas", "Gas / Petrol", "Hybrid", "Other"]
