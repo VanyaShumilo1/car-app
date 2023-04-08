@@ -1,0 +1,38 @@
+@import './colors.scss';
+
+.sidebarMenu {
+  margin-top: 20px;
+  a {
+    color: $onSurface;
+    text-decoration: none;
+  }
+
+  &__item {
+    padding: 10px 15px;
+    border-radius: 5px;
+    background: $surface;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__wrapper {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+  }
+
+  &__icon {
+
+  }
+
+  &__txt {
+    font-size: 20px;
+    letter-spacing: 0.15px;
+  }
+
+  &__subinfo {
+    letter-spacing: 0.15px;
+  }
+
+}
