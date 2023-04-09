@@ -41,6 +41,9 @@ const carSlice = createSlice({
             state.cars.items = []
             state.outgoings.items = []
         },
+        removeCar(state, action) {
+            state.cars.items = state.cars.items.filter(item => item._id !== action.payload)
+        }
     },
     extraReducers: {
         //get cars
@@ -93,4 +96,4 @@ const carSlice = createSlice({
 
 export const carReducer = carSlice.reducer
 export const {changeCurrentCar} = carSlice.actions
-export const {logoutCar} = carSlice.actions
+export const {logoutCar, removeCar} = carSlice.actions
