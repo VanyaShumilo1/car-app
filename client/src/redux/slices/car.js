@@ -43,7 +43,13 @@ const carSlice = createSlice({
         },
         removeCar(state, action) {
             state.cars.items = state.cars.items.filter(item => item._id !== action.payload)
-        }
+            if (state.currentCar._id === action.payload) {
+                state.currentCar = state.cars.items[0]
+            }
+        },
+        // addCar() {
+        //     state.cars.items
+        // }
     },
     extraReducers: {
         //get cars
