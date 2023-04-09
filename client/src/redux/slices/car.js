@@ -40,7 +40,7 @@ const carSlice = createSlice({
             state.currentCar = {}
             state.cars.items = []
             state.outgoings.items = []
-        }
+        },
     },
     extraReducers: {
         //get cars

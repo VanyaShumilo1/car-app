@@ -1,0 +1,10 @@
+
+.garageList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 15px;
+  overflow-y: scroll;
+  height: 700px;
+  padding-bottom: 50px;
+}

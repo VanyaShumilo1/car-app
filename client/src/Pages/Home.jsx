@@ -34,16 +34,20 @@ const Home = () => {
 
     const currentCar = useSelector(state => state.car.currentCar)
     useEffect(() => {
+        console.log(1)
         if (isAuth) {
+            console.log(2)
             dispatch(fetchCars())
         }
     }, [])
 
     useEffect(() => {
+        console.log(3)
         dispatch(fetchOutgoingsFromCar(currentCar?._id))
     }, [currentCar])
 
     useEffect(() => {
+        console.log(4)
         setPrice(countOutgoings(outgoings))
     }, [outgoings])
 

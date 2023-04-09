@@ -12,6 +12,7 @@ import {capitalize} from "../utils/capitalize.js";
 import {FormControl, InputLabel, MenuItem, Select, TextField} from "@mui/material";
 import {fuelTypes} from "../utils/fuelTypes.js";
 import '../styles/Inputs.scss'
+import {fetchCars} from "../redux/slices/car.js";
 
 const AddCar = () => {
 
@@ -49,10 +50,9 @@ const AddCar = () => {
         }
         console.log(fields)
         const car = await axios.post('/car', fields)
+        await fetchCars()
         goBack()
     }
-
-    console.log(errors.fuelType)
 
     return (
         <div className={styles.addCar}>

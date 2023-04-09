@@ -38,7 +38,7 @@ const Header = ({sidebar, setSidebar, isCarListActive, setCarListActive}) => {
             </div>
             <div className={styles.header__car}>
                 {
-                    currentCar
+                    currentCar?._id
                         ?
                         <>
                             <div>{currentCar?.brand} {currentCar?.model}</div>
