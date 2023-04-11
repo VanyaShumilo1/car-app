@@ -30,6 +30,7 @@ router.post('/', checkAuth, carValidation, handleValidation, async (req, res) =>
     }
 })
 
+
 router.get('/', checkAuth, async (req, res) => {
     try {
         const userId = req.userId

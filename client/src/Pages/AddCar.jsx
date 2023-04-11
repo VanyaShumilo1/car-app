@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom";
 import Input from "../Components/UI/Input.jsx";
 import styles from '../styles/AddCar.module.scss'
 import {useForm} from "react-hook-form";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import axios from "../axios.js";
 import Button from "../Components/UI/Button.jsx";
 import HeaderBack from "../Components/Header/HeaderBack.jsx";
@@ -12,7 +12,6 @@ import {capitalize} from "../utils/capitalize.js";
 import {FormControl, InputLabel, MenuItem, Select, TextField} from "@mui/material";
 import {fuelTypes} from "../utils/fuelTypes.js";
 import '../styles/Inputs.scss'
-import {fetchCars} from "../redux/slices/car.js";
 
 const AddCar = () => {
 
@@ -39,6 +38,7 @@ const AddCar = () => {
         mode: 'onChange'
     })
 
+    const cars = useSelector((state) => state.car.cars.items)
     const onSubmit = async (values) => {
         const fields = {
             ...values,
@@ -50,7 +50,6 @@ const AddCar = () => {
         }
         console.log(fields)
         const car = await axios.post('/car', fields)
-        await fetchCars()
         goBack()
     }
 

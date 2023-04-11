@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {logout, selectIsAuth} from "../redux/slices/auth.js";
-import {Link} from "react-router-dom";
-import {fetchCars, fetchOutgoings, fetchOutgoingsFromCar} from "../redux/slices/car.js";
+import {fetchCars, fetchOutgoingsFromCar} from "../redux/slices/car.js";
 import Header from "../Components/Header/Header.jsx";
 import Sidebar from "../Components/Sidebar/Sidebar.jsx";
 import {countOutgoings, createOutgoingsArrays} from "../utils/countOutgoings.js";
@@ -13,47 +12,35 @@ import CircleLinkButton from "../Components/UI/CircleLinkButton.jsx";
 import OutgoingsList from "../Components/OutgoingsList.jsx";
 import Title from "../Components/UI/Title.jsx";
 import styles from '../styles/Home.module.scss'
+
 const Home = () => {
 
     const dispatch = useDispatch()
     const isAuth = useSelector(selectIsAuth)
-
-    const car = useSelector((state) => state.car.cars.items)
-    const user = useSelector((state) => state.auth.data)
     const outgoings = useSelector((state) => state.car.outgoings.items)
-
     const [sidebar, setSidebar] = useState('')
     const [isCarListActive, setCarListActive] = useState('')
 
-
     const [price, setPrice] = useState(0)
-
-    const onClickLogout = () => {
-        dispatch(logout())
-    };
 
     const currentCar = useSelector(state => state.car.currentCar)
     useEffect(() => {
-        console.log(1)
         if (isAuth) {
-            console.log(2)
+            console.log(11)
             dispatch(fetchCars())
         }
     }, [])
 
     useEffect(() => {
-        console.log(3)
         dispatch(fetchOutgoingsFromCar(currentCar?._id))
     }, [currentCar])
 
     useEffect(() => {
-        console.log(4)
         setPrice(countOutgoings(outgoings))
     }, [outgoings])
 
     const [keys, values] = createOutgoingsArrays(outgoings)
 
-    console.log(outgoings)
 
     return (
         <div>
