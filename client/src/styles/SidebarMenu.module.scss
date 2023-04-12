@@ -2,6 +2,10 @@
 
 .sidebarMenu {
   margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
   a {
     color: $onSurface;
     text-decoration: none;

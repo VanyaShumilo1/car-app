@@ -1,4 +1,5 @@
 
+
 export const countOutgoings = (outgoings) => {
     let x = 0;
 
@@ -20,6 +21,9 @@ export const createOutgoingsArrays = (outgoings) => {
         }
 
     }
+
+    const keys = Object.keys(mp)
+    const values = Object.values(mp)
 
     return [Object.keys(mp), Object.values(mp)]
 

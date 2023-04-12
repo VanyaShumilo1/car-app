@@ -9,6 +9,7 @@ import {useEffect} from "react";
 import AddCar from "./Pages/AddCar.jsx";
 import AddOutgoing from "./Pages/AddOutgoing.jsx";
 import Garage from "./Pages/Garage.jsx";
+import Settings from "./Pages/Settings.jsx";
 
 function App() {
 
@@ -38,6 +39,7 @@ function App() {
                         <Route path={'/addcar'} element={<AddCar />}/>
                         <Route path={'/addoutgoing'} element={<AddOutgoing />}/>
                         <Route path={'/garage'} element={<Garage />}/>
+                        <Route path={'/settings'} element={<Settings />}/>
                         <Route path={'/*'} element={<Navigate to={'/'}/>}/>
                     </>
                     :
