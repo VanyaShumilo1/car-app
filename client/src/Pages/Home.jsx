@@ -4,7 +4,7 @@ import {logout, selectIsAuth} from "../redux/slices/auth.js";
 import {fetchCars, fetchOutgoingsFromCar} from "../redux/slices/car.js";
 import Header from "../Components/Header/Header.jsx";
 import Sidebar from "../Components/Sidebar/Sidebar.jsx";
-import {countOutgoings, createOutgoingsArrays, createOutgoingsArraysWithExchange} from "../utils/countOutgoings.js";
+import {countOutgoings, createOutgoingsArraysWithExchange} from "../utils/countOutgoings.js";
 import CarList from "../Components/CarList.jsx";
 import Chart from 'react-apexcharts'
 import chartStyles from '../styles/Chart.module.scss'
@@ -40,8 +40,11 @@ const Home = () => {
 
     //const [keys, values] = createOutgoingsArrays(outgoings)
 
+
+    const currentCurrency = useSelector(state => state.car.currentCurrency)
+    console.log(currentCurrency)
     const func = async () => {
-        return await createOutgoingsArraysWithExchange(outgoings)
+        return await createOutgoingsArraysWithExchange(outgoings, currentCurrency)
     }
 
     const [keys, setKeys] = useState([])

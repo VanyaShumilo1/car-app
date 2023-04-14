@@ -26,7 +26,8 @@ const initialState = {
         items: [],
         status: 'loading'
     },
-    currentCar: {}
+    currentCar: {},
+    currentCurrency: "UAH"
 }
 
 const carSlice = createSlice({

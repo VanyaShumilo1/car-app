@@ -1,5 +1,6 @@
 import axios from "axios";
 import {logoutCar} from "../redux/slices/car.js";
+import {useSelector} from "react-redux";
 
 
 export const countOutgoings = (outgoings) => {
@@ -12,32 +13,32 @@ export const countOutgoings = (outgoings) => {
     return x
 }
 
-const currencies = async (outgoings) => {
-    const mp = {
-        'UAH-UAH': 1,
-        'USD-UAH': 36.742362
+const currencies = async (outgoings, currentCurrency) => {
+    const mp = {}
+    //const currentCurrency = "UAH"
+    // const currentCurrency = useSelector(state => state.car.currentCurrency)
+    console.log(currentCurrency)
+    for (let i = 0; i < outgoings.length; i++) {
+        const outgoingCurrency = outgoings[i].currency
+        if (currentCurrency === outgoingCurrency) {
+            mp[`${currentCurrency}-${outgoingCurrency}`] = 1
+        }
+        else if (!mp[outgoings[i][`${outgoings[i].currency}-${currentCurrency}`]]) {
+            const price = await axios.get(`https://api.apilayer.com/exchangerates_data/convert?to=${currentCurrency}&from=${outgoingCurrency}&amount=${1}`, {
+                headers: {
+                    apikey: "dor1RkO39FLAx5Uh0ebEGHCPEITSMJTe"
+                }
+            })
+
+            mp[`${outgoings[i].currency}-${currentCurrency}`] = price.data.result.toFixed(1)
+        }
     }
-    const currentCurrency = "UAH"
-    // for (let i = 0; i < outgoings.length; i++) {
-    //
-    //     if (!mp[outgoings[i][`${outgoings[i].currency}-${currentCurrency}`]]) {
-    //         const outgoingCurrency = outgoings[i].currency
-    //
-    //         const price = await axios.get(`https://api.apilayer.com/exchangerates_data/convert?to=${currentCurrency}&from=${outgoingCurrency}&amount=${1}`, {
-    //             headers: {
-    //                 apikey: "dor1RkO39FLAx5Uh0ebEGHCPEITSMJTe"
-    //             }
-    //         })
-    //
-    //         mp[`${outgoings[i].currency}-${currentCurrency}`] = price.data.result
-    //     }
-    // }
     console.log(mp)
     return mp
 }
 
-export const createOutgoingsArraysWithExchange = async (outgoings) => {
-    const currenciesObj = await currencies(outgoings)
+export const createOutgoingsArraysWithExchange = async (outgoings, currentCurrency) => {
+    const currenciesObj = await currencies(outgoings, currentCurrency)
     let mp = {}
 
     for (let i = 0; i < outgoings.length; i++) {
@@ -50,37 +51,4 @@ export const createOutgoingsArraysWithExchange = async (outgoings) => {
 
     //console.log(mp)
     return mp
-}
-
-export const createOutgoingsArrays = (outgoings) => {
-    let mp = {}
-    //console.log(createOutgoingsArraysWithExchange(outgoings))
-    currencies(outgoings).then(data => {
-
-        for (let i = 0; i < outgoings.length; i++) {
-            if (!mp[outgoings[i].type]) {
-                mp[outgoings[i].type] = Number(outgoings[i].price * data[`${outgoings[i].currency}-UAH`])
-            } else {
-                mp[outgoings[i].type] += Number(outgoings[i].price * data[`${outgoings[i].currency}-UAH`])
-            }
-        }
-
-        //console.log(mp)
-        return mp
-    })
-
-    for (let i = 0; i < outgoings.length; i++) {
-        if (!mp[outgoings[i].type]) {
-            mp[outgoings[i].type] = Number(outgoings[i].price)
-        } else {
-            mp[outgoings[i].type] += Number(outgoings[i].price)
-        }
-    }
-
-
-    const keys = Object.keys(mp)
-    const values = Object.values(mp)
-    //console.log(mp)
-    return [Object.keys(mp), Object.values(mp)]
-
 }
