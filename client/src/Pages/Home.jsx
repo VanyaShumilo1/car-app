@@ -4,7 +4,7 @@ import {logout, selectIsAuth} from "../redux/slices/auth.js";
 import {fetchCars, fetchOutgoingsFromCar} from "../redux/slices/car.js";
 import Header from "../Components/Header/Header.jsx";
 import Sidebar from "../Components/Sidebar/Sidebar.jsx";
-import {countOutgoings, createOutgoingsArrays} from "../utils/countOutgoings.js";
+import {countOutgoings, createOutgoingsArrays, createOutgoingsArraysWithExchange} from "../utils/countOutgoings.js";
 import CarList from "../Components/CarList.jsx";
 import Chart from 'react-apexcharts'
 import chartStyles from '../styles/Chart.module.scss'
@@ -26,7 +26,6 @@ const Home = () => {
     const currentCar = useSelector(state => state.car.currentCar)
     useEffect(() => {
         if (isAuth) {
-            console.log(11)
             dispatch(fetchCars())
         }
     }, [])
@@ -39,69 +38,95 @@ const Home = () => {
         setPrice(countOutgoings(outgoings))
     }, [outgoings])
 
-    const [keys, values] = createOutgoingsArrays(outgoings)
+    //const [keys, values] = createOutgoingsArrays(outgoings)
 
+    const func = async () => {
+        return await createOutgoingsArraysWithExchange(outgoings)
+    }
+
+    const [keys, setKeys] = useState([])
+    const [values, setValues] = useState([])
+    const [isChartLoading, setIsChartLoading] = useState(true)
+
+    useEffect(() => {
+        func().then(data => {
+            console.log(data)
+            setKeys(Object.keys(data))
+            setValues( Object.values(data))
+            setIsChartLoading(false)
+        })
+    }, [outgoings])
+
+
+
+    console.log(keys)
+
+    console.log(values)
 
     return (
         <div>
-            <Header sidebar={sidebar} setSidebar={setSidebar} isCarListActive={isCarListActive} setCarListActive={setCarListActive}/>
+            <Header sidebar={sidebar} setSidebar={setSidebar} isCarListActive={isCarListActive}
+                    setCarListActive={setCarListActive}/>
             <Sidebar sidebar={sidebar} setSidebar={setSidebar}/>
             <CarList isCarListActive={isCarListActive} setCarListActive={setCarListActive}/>
             {
                 currentCar
-                    ? (
-                        <>
-                            <Chart
-                                className={chartStyles.chart}
-                                type={'donut'}
-                                width={window.innerWidth}
-                                height={400}
-                                series={values}
-                                options={{
-                                    chart: {
-                                        foreColor: '#fff',
-                                        animations: {
-                                            enabled: true,
-                                            easing: 'easein',
-                                            speed: 800,
-                                            animateGradually: {
+                    ? isChartLoading ?
+                        <div>Loading...</div>
+                        :
+                        (
+                            <>
+                                <Chart
+                                    className={chartStyles.chart}
+                                    type={'donut'}
+                                    width={window.innerWidth}
+                                    height={400}
+                                    series={values}
+                                    options={{
+                                        chart: {
+                                            foreColor: '#fff',
+                                            animations: {
                                                 enabled: true,
-                                                delay: 150
-                                            },
-                                            dynamicAnimation: {
-                                                enabled: true,
-                                                speed: 350
+                                                easing: 'easein',
+                                                speed: 800,
+                                                animateGradually: {
+                                                    enabled: true,
+                                                    delay: 150
+                                                },
+                                                dynamicAnimation: {
+                                                    enabled: true,
+                                                    speed: 350
+                                                }
                                             }
-                                        }
-                                    },
+                                        },
 
-                                    labels: keys,
-                                    theme: {
-                                        palette: 'palette6' // upto palette10
-                                    },
+                                        labels: keys,
+                                        theme: {
+                                            palette: 'palette6' // upto palette10
+                                        },
 
 
-                                    plotOptions: {
-                                        pie: {
-                                            donut: {
-                                                labels: {
-                                                    show: true,
-                                                    total: {
+                                        plotOptions: {
+                                            pie: {
+                                                donut: {
+                                                    labels: {
                                                         show: true,
-                                                        color: "white"
-                                                    }
+                                                        total: {
+                                                            show: true,
+                                                            color: "white"
+                                                        }
 
+                                                    }
                                                 }
                                             }
                                         }
-                                    }
-                                }}
-                            />
+                                    }}
+                                />
 
-                            <OutgoingsList outgoings={outgoings}/>
-                            <CircleLinkButton to={'/addoutgoing'}>+</CircleLinkButton>
-                        </>
-                    )
+                                <OutgoingsList outgoings={outgoings}/>
+                                <CircleLinkButton to={'/addoutgoing'}>+</CircleLinkButton>
+                            </>
+                        )
                     :
                     <div className={styles.noCar}>
                         <Title>
