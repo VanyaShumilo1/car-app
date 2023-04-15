@@ -48,9 +48,10 @@ const carSlice = createSlice({
                 state.currentCar = state.cars.items[0]
             }
         },
-        // addCar() {
-        //     state.cars.items
-        // }
+        changeCurrentCurrency(state, action) {
+            state.currentCurrency = action.payload
+
+        }
     },
     extraReducers: {
         //get cars
@@ -104,4 +105,4 @@ const carSlice = createSlice({
 
 export const carReducer = carSlice.reducer
 export const {changeCurrentCar} = carSlice.actions
-export const {logoutCar, removeCar} = carSlice.actions
+export const {logoutCar, removeCar,changeCurrentCurrency} = carSlice.actions
