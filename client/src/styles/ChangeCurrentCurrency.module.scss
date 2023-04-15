@@ -3,4 +3,16 @@
 .changeCurrentCurrency {
   padding: 10px 15px;
   background: $surface;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 5px;
+  select {
+    padding: 5px;
+    background: none;
+    color: $onSurface;
+    option {
+      color: black;
+    }
+  }
 }

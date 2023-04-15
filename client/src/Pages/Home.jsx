@@ -55,12 +55,19 @@ const Home = () => {
         func().then(data => {
             console.log(data)
             setKeys(Object.keys(data))
-            setValues( Object.values(data))
+            setValues(Object.values(data))
             setIsChartLoading(false)
         })
     }, [outgoings])
 
+    const sum = (arr) => {
+        let res = 0
+        arr.forEach(el => {
+            res += el
+        })
 
+        return res
+    }
 
     console.log(keys)
     console.log(values)
@@ -85,6 +92,7 @@ const Home = () => {
                                     height={400}
                                     series={values}
                                     options={{
+
                                         chart: {
                                             foreColor: '#fff',
                                             animations: {
@@ -115,8 +123,20 @@ const Home = () => {
                                                         show: true,
                                                         total: {
                                                             show: true,
-                                                            color: "white"
-                                                        }
+                                                            color: "white",
+                                                            formatter: (val) => {
+                                                                console.log(val)
+                                                                return sum(val.config.series).toFixed(0) + ` ${currentCurrency}`
+                                                            }
+                                                        },
+                                                        value: {
+                                                            show: true,
+                                                            color: "white",
+                                                            formatter: (val) => {
+                                                                console.log(val)
+                                                                return Number(val).toFixed(0)+ ` ${currentCurrency}`
+                                                            }
+                                                        },
 
                                                     }
                                                 }
