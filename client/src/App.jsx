@@ -20,15 +20,15 @@ function App() {
         dispatch(fetchAuthMe())
     }, [])
 
-    // const width = window.innerWidth
-    //
-    //  if(width > 500) {
-    //      return (
-    //          <div>
-    //              only mobile
-    //          </div>
-    //      )
-    //  }
+    const width = window.innerWidth
+
+     if(width > 500) {
+         return (
+             <div>
+                 only mobile
+             </div>
+         )
+     }
 
     return (
         <Routes>

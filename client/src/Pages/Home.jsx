@@ -12,6 +12,9 @@ import CircleLinkButton from "../Components/UI/CircleLinkButton.jsx";
 import OutgoingsList from "../Components/OutgoingsList.jsx";
 import Title from "../Components/UI/Title.jsx";
 import styles from '../styles/Home.module.scss'
+import {SumArray} from "../utils/SumArray.js";
+import {PricePerDay} from "../utils/PricePerDay.js";
+
 
 const Home = () => {
 
@@ -38,11 +41,7 @@ const Home = () => {
         setPrice(countOutgoings(outgoings))
     }, [outgoings])
 
-    //const [keys, values] = createOutgoingsArrays(outgoings)
-
-
     const currentCurrency = useSelector(state => state.car.currentCurrency)
-    console.log(currentCurrency)
     const func = async () => {
         return await createOutgoingsArraysWithExchange(outgoings, currentCurrency)
     }
@@ -53,24 +52,13 @@ const Home = () => {
 
     useEffect(() => {
         func().then(data => {
-            console.log(data)
             setKeys(Object.keys(data))
             setValues(Object.values(data))
             setIsChartLoading(false)
         })
     }, [outgoings])
 
-    const sum = (arr) => {
-        let res = 0
-        arr.forEach(el => {
-            res += el
-        })
-
-        return res
-    }
-
-    console.log(keys)
-    console.log(values)
+    const pricePerDay = PricePerDay(currentCar.createdAt, SumArray(values))
 
     return (
         <div>
@@ -115,7 +103,6 @@ const Home = () => {
                                             palette: 'palette6' // upto palette10
                                         },
 
-
                                         plotOptions: {
                                             pie: {
                                                 donut: {
@@ -125,15 +112,13 @@ const Home = () => {
                                                             show: true,
                                                             color: "white",
                                                             formatter: (val) => {
-                                                                console.log(val)
-                                                                return sum(val.config.series).toFixed(0) + ` ${currentCurrency}`
+                                                                return SumArray(val.config.series).toFixed(0) + ` ${currentCurrency}`
                                                             }
                                                         },
                                                         value: {
                                                             show: true,
                                                             color: "white",
                                                             formatter: (val) => {
-                                                                console.log(val)
                                                                 return Number(val).toFixed(0)+ ` ${currentCurrency}`
                                                             }
                                                         },
@@ -144,8 +129,10 @@ const Home = () => {
                                         }
                                     }}
                                 />
-
-                                <OutgoingsList outgoings={outgoings}/>
+                                <div className={styles.perDay}>
+                                    {pricePerDay.toFixed(0)} {currentCurrency} per day
+                                </div>
+                                <OutgoingsList outgoings={outgoings} pricePerDay={pricePerDay}/>
                                 <CircleLinkButton to={'/addoutgoing'}>+</CircleLinkButton>
                             </>
                         )

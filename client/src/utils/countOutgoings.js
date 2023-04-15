@@ -20,7 +20,6 @@ const currencies = async (outgoings, currentCurrency) => {
         "USD-EUR": 0.9,
         "USD-USD": 1,
     }
-    console.log(currentCurrency)
     // for (let i = 0; i < outgoings.length; i++) {
     //     const outgoingCurrency = outgoings[i].currency
     //     if (currentCurrency === outgoingCurrency) {
@@ -36,7 +35,6 @@ const currencies = async (outgoings, currentCurrency) => {
     //         mp[`${outgoings[i].currency}-${currentCurrency}`] = price.data.result.toFixed(2)
     //     }
     // }
-    console.log(mp)
     return mp
 }
 
