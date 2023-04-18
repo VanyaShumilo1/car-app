@@ -16,6 +16,7 @@ const AddOutgoing = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
+    const currentCurrency = useSelector(state => state.car.currentCurrency)
     const currentCar = useSelector(state => state.car.currentCar)
     const goBack = () => {
         navigate(-1)
@@ -28,7 +29,7 @@ const AddOutgoing = () => {
     } = useForm({
         defaultValues: {
             price: '',
-            currency: 'USD',
+            currency: currentCurrency,
             description: '',
             type: '',
         },

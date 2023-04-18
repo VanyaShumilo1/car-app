@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {logout, selectIsAuth} from "../redux/slices/auth.js";
+import {selectIsAuth} from "../redux/slices/auth.js";
 import {fetchCars, fetchOutgoingsFromCar} from "../redux/slices/car.js";
 import Header from "../Components/Header/Header.jsx";
 import Sidebar from "../Components/Sidebar/Sidebar.jsx";
@@ -14,6 +14,7 @@ import Title from "../Components/UI/Title.jsx";
 import styles from '../styles/Home.module.scss'
 import {SumArray} from "../utils/SumArray.js";
 import {PricePerDay} from "../utils/PricePerDay.js";
+import Loader from "../Components/Loader.jsx";
 
 
 const Home = () => {
@@ -34,7 +35,7 @@ const Home = () => {
     }, [])
 
     useEffect(() => {
-        dispatch(fetchOutgoingsFromCar(currentCar?._id))
+        dispatch(fetchOutgoingsFromCar(currentCar?._id)).then(() => setIsChartLoading(false))
     }, [currentCar])
 
     useEffect(() => {
@@ -42,7 +43,7 @@ const Home = () => {
     }, [outgoings])
 
     const currentCurrency = useSelector(state => state.car.currentCurrency)
-    const func = async () => {
+    const getOutgoingArrays = async () => {
         return await createOutgoingsArraysWithExchange(outgoings, currentCurrency)
     }
 
@@ -51,14 +52,14 @@ const Home = () => {
     const [isChartLoading, setIsChartLoading] = useState(true)
 
     useEffect(() => {
-        func().then(data => {
+        getOutgoingArrays().then(data => {
             setKeys(Object.keys(data))
             setValues(Object.values(data))
-            setIsChartLoading(false)
+
         })
     }, [outgoings])
 
-    const pricePerDay = PricePerDay(currentCar.createdAt, SumArray(values))
+    const pricePerDay = PricePerDay(currentCar?.createdAt, SumArray(values))
 
     return (
         <div>
@@ -68,8 +69,8 @@ const Home = () => {
             <CarList isCarListActive={isCarListActive} setCarListActive={setCarListActive}/>
             {
                 currentCar
-                    ? isChartLoading ?
-                        <div>Loading...</div>
+                    ? isChartLoading
+                        ? <Loader />
                         :
                         (
                             <>
@@ -80,7 +81,6 @@ const Home = () => {
                                     height={400}
                                     series={values}
                                     options={{
-
                                         chart: {
                                             foreColor: '#fff',
                                             animations: {
